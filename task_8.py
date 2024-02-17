@@ -2,82 +2,77 @@ from abc import ABC, abstractmethod
 
 
 class Person(ABC):
-    @staticmethod
     @abstractmethod
-    def display_student_info(student):
+    def display_details(self):
         pass
 
-    @staticmethod
     @abstractmethod
-    def average_grade(grades):
+    def average_grade(self, grades):
         pass
 
 
-class StudentInfo(Person):
-    @staticmethod
-    def average_grade(grades: dict):
-        if not grades:
-            return 0
+class StudentMixin(Person):
+    def average_grade(self, *args):
         n = 0
-        for key in grades:
-            n += grades[key]
+        if len(args) != 0:
 
-        return int(n / len(grades))
+            student = self.students[args[0]]
+            for k in student.grades:
+                n += student.grades[k]
+            return n / len(student.grades)
+        else:
+            for k in self.grades:
+                n += self.grades[k]
+            return n / len(self.grades)
 
-    @staticmethod
-    def display_student_info(student):
-        return f"Id - {student.student_id}, name - {student.name}, average grade - {student.average_grade}"
+    def display_details(self, *args):
+        if len(args) != 0:
+
+            print(f"average grade for Student Management system {self.students[kwargs['student_id']].name}")
+        else:
+            print(f"average grade for student class {self.name}")
+        pass
 
 
-class Student:
-    def __init__(self, student_id: int, name: str, grades: dict):
+class Student(StudentMixin):
+    def __init__(self, student_id, name, grades: dict):
         self._student_id = student_id
         self.name = name
         self.grades = grades
-        self.average = 0
 
-    def add_grade(self, grade, subject):
-        self.grades[subject] = grade
+    def add_grade(self, subject, grade):
+        try:
+            if grade >= 0:
+                self.grades[subject] = grade
+            else:
+                raise Exception("grade must be greater than 0")
+        except Exception as msg:
+            print(msg)
 
     @property
     def average_grade(self):
-        self.average = StudentInfo().average_grade(self.grades)
-        return self.average
-
-    def display_student_info(self):
-        return StudentInfo().display_student_info(self)
-
-    @property
-    def student_id(self):
-        return self._student_id
+        return super().average_grade()
 
 
-class StudentManagementSystem:
-    def __init__(self, students=None):
-        if not students:
-            self.students = {}
-        self.students = students
-        self.student_info = ""
+class StudentManagementSystem(StudentMixin):
+    def __init__(self):
+        self.students = {}
 
-    def add_student(self, student_id, student: Student):
-        self.students[student_id] = student
+    def add_student(self, student_id, name: str, grades: dict):
+        try:
+            if student_id not in self.students:
+                self.students[student_id] = Student(student_id, name, grades)
+                print(f"student with id of {student_id} has been created")
+            else:
+                raise Exception(f"User with id {student_id} already exists")
+        except Exception as msg:
+            print(msg)
 
-    def show_student_details(self, student_id):
-        self.student_info = StudentInfo().display_student_info(self.students[student_id])
-        return self.student_info
 
-
-g = {
-    "math": 81,
-    "history": 70,
-    "english": 51
-}
-
-student_1 = Student(1, "luka", g)
-student_2 = Student(2, "jemal", g)
-student_3 = Student(3, "giorgi", g)
-
-students_ = {1: student_1, 2: student_2, 3: student_3}
-
-obj = StudentManagementSystem(students_)
-
+student_1 = Student(1, "luka", {"math": 60, "english": 80})
+system = StudentManagementSystem()
+# student_1.display_details()
+system.add_student(1, "luka", {"math": 80})
+# system.add_student(1, "luka", {"math": 80})
+print(student_1.average_grade)
+print(system.average_grade(1))
