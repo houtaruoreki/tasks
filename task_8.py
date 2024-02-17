@@ -13,17 +13,15 @@ class Person(ABC):
 
 class StudentMixin(Person):
     def average_grade(self, *args):
-        n = 0
         if len(args) != 0:
-
-            student = self.students[args[0]]
-            for k in student.grades:
-                n += student.grades[k]
-            return n / len(student.grades)
+            grades = self.students[args[0]].grades
         else:
-            for k in self.grades:
-                n += self.grades[k]
-            return n / len(self.grades)
+            grades = self.grades
+        n = 0
+        for k in grades:
+            n += grades[k]
+
+        return n / len(grades)
 
     def display_details(self, *args):
         if len(args) != 0:
@@ -80,5 +78,5 @@ system = StudentManagementSystem()
 # student_1.display_details()
 system.add_student(1, "luka", {"math": 80})
 # system.add_student(1, "luka", {"math": 80})
-print(student_1.display_details)
-print(system.display_details(1))
+print(student_1.average_grade)
+print(system.average_grade(1))
