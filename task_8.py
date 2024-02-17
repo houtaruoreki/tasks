@@ -73,10 +73,4 @@ class StudentManagementSystem(StudentMixin):
             print(msg)
 
 
-student_1 = Student(1, "luka", {"math": 60, "english": 80})
-system = StudentManagementSystem()
-# student_1.display_details()
-system.add_student(1, "luka", {"math": 80})
-# system.add_student(1, "luka", {"math": 80})
-print(student_1.average_grade)
-print(system.average_grade(1))
+
