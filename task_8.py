@@ -27,11 +27,10 @@ class StudentMixin(Person):
 
     def display_details(self, *args):
         if len(args) != 0:
-
-            print(f"average grade for Student Management system {self.students[kwargs['student_id']].name}")
+            student = self.students[args[0]]
+            return f"ID - {student.student_id}, Name - {student.name}, Average Grade - {student.average_grade}"
         else:
-            print(f"average grade for student class {self.name}")
-        pass
+            return f"ID - {self.student_id}, Name - {self.name}, Average Grade - {self.average_grade}"
 
 
 class Student(StudentMixin):
@@ -53,6 +52,14 @@ class Student(StudentMixin):
     def average_grade(self):
         return super().average_grade()
 
+    @property
+    def display_details(self):
+        return super().display_details()
+
+    @property
+    def student_id(self):
+        return self._student_id
+
 
 class StudentManagementSystem(StudentMixin):
     def __init__(self):
@@ -62,7 +69,6 @@ class StudentManagementSystem(StudentMixin):
         try:
             if student_id not in self.students:
                 self.students[student_id] = Student(student_id, name, grades)
-                print(f"student with id of {student_id} has been created")
             else:
                 raise Exception(f"User with id {student_id} already exists")
         except Exception as msg:
@@ -74,5 +80,5 @@ system = StudentManagementSystem()
 # student_1.display_details()
 system.add_student(1, "luka", {"math": 80})
 # system.add_student(1, "luka", {"math": 80})
-print(student_1.average_grade)
-print(system.average_grade(1))
+print(student_1.display_details)
+print(system.display_details(1))
