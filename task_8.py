@@ -80,5 +80,4 @@ student_3 = Student(3, "giorgi", g)
 students_ = {1: student_1, 2: student_2, 3: student_3}
 
 obj = StudentManagementSystem(students_)
-student_id_ = int(input("Enter student ID: "))
-print(obj.show_student_details(student_id_))
+
