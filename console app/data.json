@@ -1,0 +1,41 @@
+[
+    {
+        "users": {
+            "username1": {
+                "password": "password1",
+                "diaries": [
+                    {
+                        "memo": "user1 memo 1",
+                        "tags": "tag1"
+                    },
+                    {
+                        "memo": "user1 memo 2",
+                        "tags": "tag2"
+                    }
+                ]
+            },
+            "username2": {
+                "password": "password2",
+                "diaries": [
+                    {
+                        "memo": "user2 memo 1",
+                        "tags": "tag1"
+                    }
+                ]
+            },
+            "username4": {
+                "password": "password2",
+                "diaries": [
+                    {
+                        "memo": "aaaaaaaa",
+                        "tags": "blaa"
+                    },
+                    {
+                        "memo": "another memo",
+                        "tags": "memomomomo"
+                    }
+                ]
+            }
+        }
+    }
+]
