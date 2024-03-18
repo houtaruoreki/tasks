@@ -13,7 +13,7 @@ class UserManager:
     def add_new_user(self,username,password):
         self.users[username] = User(username,password)
     
-    def seach_user(self,username):
+    def search_user(self,username):
         return username in self.users
     
     def check_password(self,username,password):
@@ -21,7 +21,7 @@ class UserManager:
         return user.password == password
     
     def loginUser(self,username,password):
-        return self.seach_user(username) and self.check_password(username,password)
+        return self.search_user(username) and self.check_password(username,password)
     
     def registerUser(self,username,password):
         if username not in self.users:
