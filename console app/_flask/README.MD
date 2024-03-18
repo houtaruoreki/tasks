@@ -6,11 +6,11 @@ entries.
 ## Setup Instructions
 
 1. **Clone the Repository:**
-- git clone https://github.com/houtaruoreki/tasks/tree/test/console%20app/_flask
+- git clone https://github.com/houtaruoreki/tasks.git
 
 2. **Install Dependencies:**
-- cd flask-diary-app
-- pip install -r requirements.txt
+- cd ./tasks/console\ app/
+
 3. **Database Setup:**
 - This application uses SQLite as its database. You need to initialize the database before running the application.
 - Run the following commands to set up the database:
