@@ -8,6 +8,7 @@
 <body>
 
 <div class="container">
+    <button class="logout-button" onclick="logout()">Logout</button>
     <div class="search-container">
         <input type="text" name="search" id="search" autocomplete="off" placeholder="Search..." oninput="searchDiaryEntries()">
     </div>
@@ -17,6 +18,8 @@
         <input type="text" id="tag-input" placeholder="Enter tags...">
         <button id="add-button" class="add-diary-button" onclick="addDiaryEntry()">Add Entry</button>
         <button id="apply-button" class="add-diary-button apply-diary-button" style="display: none;" onclick="applyEdit()">Apply</button>
+
+
 
         <h2>Diaries</h2>
         {% for row in data %}

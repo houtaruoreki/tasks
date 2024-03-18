@@ -27,6 +27,7 @@ class Menu:
             "2": self.register_user,
             "3": self.quit,
         }
+
     def print_username(self):
         print(self.current_user)
 
@@ -37,7 +38,7 @@ class Menu:
             utils.insert_diary_into_json(self.path, username, password)
             self.logged_in = True
             self.current_user = username
-            
+
     def login_user(self):
         username = input("Enter username: ")
         password = input("Enter password: ")
@@ -79,7 +80,7 @@ class Menu:
 
     def sort_memos(self):
         lst = self.diarybook.diaries
-    
+
         if len(lst) != 0:
             for i in range(0, len(lst)):
                 for j in range(i + 1, len(lst)):
@@ -95,10 +96,10 @@ class Menu:
             data = data.items()
             for username, info in data:
                 diaries = info['diaries'][0]
-                self.usermanager.add_new_user(username,info['password'])
-                self.diarybook.new_diary(memo=diaries['memo'],tags=diaries['tags'])
-                
-           
+                self.usermanager.add_new_user(username, info['password'])
+                self.diarybook.new_diary(memo=diaries['memo'], tags=diaries['tags'])
+
+
         except FileExistsError:
             print("data does not exists")
 
@@ -148,7 +149,6 @@ Authentication Menu:
                 action()
             else:
                 print(f"{choice} is not a valid choice")
-            
 
 
 if __name__ == "__main__":

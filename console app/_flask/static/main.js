@@ -46,6 +46,11 @@ function searchDiaryEntries() {
             entry.style.display = 'none'; // Hide the diary entry
         }
     });
+    if (document.getElementById('search').value === ""){
+            document.getElementById('diary-text').classList.remove('hidden');
+            document.getElementById('tag-input').classList.remove('hidden');
+            document.getElementById('add-button').classList.remove('hidden');
+    }
 
 
 }
@@ -80,7 +85,7 @@ function addDiaryEntry() {
                 // Reload the page after 3 seconds
                 setTimeout(function () {
                     location.reload();
-                }, 1000);
+                }, 500);
             } else {
                 // Handle errors here
                 console.error("Error adding diary entry:", xhr.responseText);
@@ -153,21 +158,19 @@ function deleteDiaryEntry(memo_id) {
         "memo_id": memo_id
     }
     let xhr = new XMLHttpRequest();
-    showFlashMessage("Diary entry deleted successfully", "red", 1000);
     xhr.open("DELETE", "/delete_diary", true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                // Diary entry successfully added, you can update the UI here if needed
                 console.log("Diary entry successfully deleted");
-                showFlashMessage("Diary entry successfully deleted", "red", "white", 1000);
+                showFlashMessage("Diary entry successfully deleted", "red", "white", 500);
 
 
                 setTimeout(function () {
                     location.reload();
-                }, 1000);
+                }, 500);
             } else {
                 // Handle errors here
                 console.error("Error adding diary entry:", xhr.responseText);
@@ -182,3 +185,18 @@ function deleteDiaryEntry(memo_id) {
 // Example usage:
 // Call deleteDiaryEntry() function after successful deletion
 // deleteDiaryEntry();
+
+function logout(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET','/logout');
+    xhr.setRequestHeader("Content-Type","application/json");
+    xhr.onreadystatechange = function (){
+        if (xhr.readyState === 4){
+            if (xhr.status === 200){
+                window.location.href = '/';
+                console.log("Logout successful");
+            }
+        }
+    }
+    xhr.send();
+}

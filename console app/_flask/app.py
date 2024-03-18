@@ -1,4 +1,4 @@
-from flask import Flask, g, render_template, request, redirect, session, url_for, flash, jsonify
+from flask import Flask, g, render_template, request, redirect, flash, session, url_for, flash, jsonify
 import sqlite3
 
 app = Flask(__name__)
@@ -40,8 +40,9 @@ def login():
         password = request.form['password']
         cur.execute('SELECT * FROM Users WHERE username = ?', (username,))
         row = cur.fetchone()
+
         if row is not None:
-            if row[1] == password:
+            if row[2] == password:
                 session['is_logged_in'] = True
                 session['user_id'] = row[0]
                 return redirect(url_for('index'))

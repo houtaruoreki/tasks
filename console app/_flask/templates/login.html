@@ -26,8 +26,20 @@
                 <input type="password" name="password" placeholder="Password" required>
             </label>
 
-            <input type="submit" value="Login">
+            <input type="submit" class="login" value="Login">
         </form>
+        <input class="register-button" type="button"  id="register" value="Register">
     </div>
+<script>
+    function register(){
+    let reg_button = document.getElementById('register')
+     reg_button.addEventListener('click', function() {
+        window.location.href = '/register';
+
+    });
+
+}
+register();
+</script>
 </body>
 </html>
