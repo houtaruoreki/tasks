@@ -93,12 +93,12 @@ class Menu:
             data = utils.read_from_json_into_app(self.path)
             if not data:
                 raise FileExistsError
-            data = data.items()
-            for username, info in data:
-                diaries = info['diaries'][0]
-                self.usermanager.add_new_user(username, info['password'])
-                self.diarybook.new_diary(memo=diaries['memo'], tags=diaries['tags'])
 
+            for username, info in data.items():  # Iterate over each user
+                diaries = info.get('diaries', [])  # Retrieve diaries or an empty list if not present
+                self.usermanager.add_new_user(username, info['password'])  # Add user
+                for diary in diaries:  # Iterate over each diary for the current user
+                    self.diarybook.new_diary(memo=diary['memo'], tags=diary['tags'])  # Add diary to diarybook
 
         except FileExistsError:
             print("data does not exists")
