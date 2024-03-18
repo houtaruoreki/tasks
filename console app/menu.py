@@ -94,11 +94,11 @@ class Menu:
             if not data:
                 raise FileExistsError
 
-            for username, info in data.items():  # Iterate over each user
-                diaries = info.get('diaries', [])  # Retrieve diaries or an empty list if not present
-                self.usermanager.add_new_user(username, info['password'])  # Add user
-                for diary in diaries:  # Iterate over each diary for the current user
-                    self.diarybook.new_diary(memo=diary['memo'], tags=diary['tags'])  # Add diary to diarybook
+            for username, info in data.items():  
+                diaries = info.get('diaries', [])  
+                self.usermanager.add_new_user(username, info['password']) 
+                for diary in diaries:  
+                    self.diarybook.new_diary(memo=diary['memo'], tags=diary['tags'])  
 
         except FileExistsError:
             print("data does not exists")
