@@ -11,6 +11,10 @@
                     {
                         "memo": "user1 memo 2",
                         "tags": "tag2"
+                    },
+                    {
+                        "memo": "rame",
+                        "tags": "rame"
                     }
                 ]
             },
@@ -35,6 +39,10 @@
                         "tags": "memomomomo"
                     }
                 ]
+            },
+            "lucy": {
+                "password": "pass",
+                "diaries": []
             }
         }
     }
