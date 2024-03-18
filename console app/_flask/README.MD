@@ -6,7 +6,7 @@ entries.
 ## Setup Instructions
 
 1. **Clone the Repository:**
-- git clone https://github.com/yourusername/flask-diary-app.git
+- git clone https://github.com/houtaruoreki/tasks/tree/test/console%20app/_flask
 
 2. **Install Dependencies:**
 - cd flask-diary-app
