@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link type="text/css" rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+<div class="login-container">
+    <h2>Login</h2>
+    <form action="#" method="post">
+        {% csrf_token %}
+        <label>
+            <input type="text" name="username" placeholder="Username" required>
+        </label>
+        <label>
+            <input type="password" name="password" placeholder="Password" required>
+        </label>
+
+        <input type="submit" class="login" value="Login">
+    </form>
+    <input class="register-button" type="button" id="register" value="Register">
+</div>
+<script>
+    function register() {
+        let reg_button = document.getElementById('register');
+        reg_button.addEventListener('click', function () {
+            window.location.href = '/register';
+        });
+
+        // Assuming this is for handling successful login
+        function handleSuccessfulLogin() {
+            // Reload the page to get a new CSRF token
+            location.reload();
+        }
+
+        // Call the function to handle successful login as needed
+        // For example, after receiving a successful response from the server
+        // Assuming there's a function called `loginSuccessHandler` that is called upon successful login
+        // You need to define this function based on your login mechanism
+        // For demonstration purposes, I'll just use a placeholder function
+        loginSuccessHandler = handleSuccessfulLogin;
+    }
+
+    register();
+</script>
+
+</body>
+</html>
