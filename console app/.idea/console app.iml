@@ -9,6 +9,7 @@
     <option name="TEMPLATE_FOLDERS">
       <list>
         <option value="$MODULE_DIR$/_flask/templates" />
+        <option value="$MODULE_DIR$/diarysite/user_auth/templates" />
       </list>
     </option>
   </component>

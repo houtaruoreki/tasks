@@ -46,13 +46,29 @@ function searchDiaryEntries() {
             entry.style.display = 'none'; // Hide the diary entry
         }
     });
-    if (document.getElementById('search').value === ""){
-            document.getElementById('diary-text').classList.remove('hidden');
-            document.getElementById('tag-input').classList.remove('hidden');
-            document.getElementById('add-button').classList.remove('hidden');
+    if (document.getElementById('search').value === "") {
+        document.getElementById('diary-text').classList.remove('hidden');
+        document.getElementById('tag-input').classList.remove('hidden');
+        document.getElementById('add-button').classList.remove('hidden');
     }
 
 
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 function addDiaryEntry() {
@@ -64,16 +80,21 @@ function addDiaryEntry() {
     document.getElementById('tag-input').value = '';
 
     // Create an object to send as JSON data
-
     let data = {
         "memo": diaryText,
         "tags": tagInput
     };
 
-    // Send POST request to /add_diary endpoint
+    // Get CSRF token
+    const csrftoken = getCookie('csrftoken');
+
+    // Send POST request to /add_diary/ endpoint
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "/add_diary", true);
+    xhr.open("POST", "/add_diary/", true);
     xhr.setRequestHeader("Content-Type", "application/json");
+
+    // Set CSRF token in the headers
+    xhr.setRequestHeader("X-CSRFToken", csrftoken);
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
@@ -96,6 +117,7 @@ function addDiaryEntry() {
     // Convert data object to JSON string before sending
     xhr.send(JSON.stringify(data));
 }
+
 
 let _memo_id = 0;
 
@@ -186,13 +208,13 @@ function deleteDiaryEntry(memo_id) {
 // Call deleteDiaryEntry() function after successful deletion
 // deleteDiaryEntry();
 
-function logout(){
+function logout() {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET','/logout');
-    xhr.setRequestHeader("Content-Type","application/json");
-    xhr.onreadystatechange = function (){
-        if (xhr.readyState === 4){
-            if (xhr.status === 200){
+    xhr.open('GET', '/logout');
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
                 window.location.href = '/';
                 console.log("Logout successful");
             }
