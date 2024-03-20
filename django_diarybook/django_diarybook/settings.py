@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'user_auth.apps.UserAuthConfig'
+    'user_auth.apps.UserAuthConfig',
+    'diary.apps.DiaryConfig'
 ]
 
 MIDDLEWARE = [
